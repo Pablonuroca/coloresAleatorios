@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<title>Listado de imágenes</title>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="css/estilo.css">
+     <script src="jquery.min.js"></script> 
+
+</head>
+<script>
+ 
+ $(inicializar);
+  function inicializar()
+   {
+    $('#jugar').click(jugar);
+    $('#parar').click(parar);
+    $('#fondo1').click(comprobar);
+   } 
+   var color;
+   var nombre;
+   var puntos=0;
+   var segundos=5;
+   var colores = ['#FF0000','#00FF00','#0000FF','#FFFF00','#FF69B4','#FFA500'];
+   var nombres=["Red","Green","Blue","Yellow","Pink","Orange"];
+   var tiempo;
+function jugar(){
+                $("#sptiempo").text("5");
+                $("#sppuntos").text("0");
+                tiempo=setInterval(juego,1000);
+}
+function parar(){
+        clearInterval(tiempo);
+}
+   function juego (){
+           color=Math.round(Math.random()*6);
+           nombre=Math.round(Math.random()*6);
+           $("#fondo1").css({"background-color":colores[color]});
+           $("#fondo1").text(nombres[nombre]);
+        segundos--;
+        $("#sptiempo").text(segundos);
+        if(segundos==0){
+                parar();
+        }
+        }
+    
+  function comprobar(){
+    if(color==nombre){
+            puntos++;
+    }
+    else{
+            puntos--;
+    }
+    $("#sppuntos").text(puntos);
+  }
+
+</script>
+    
+    <body>
+        <button id="jugar">Jugar</button>
+	<button id="parar">Parar</button><br>
+       
+        <div id="fondo1"><p></p></div>
+        
+ 	<span id="sptiempo"></span>
+      
+        <span id="sppuntos"></span>
+</body>
+
+</html>
